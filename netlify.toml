@@ -1,2 +1,8 @@
+# File: netlify.toml
+
 [functions]
   directory = "netlify/functions/"
+
+# Add these three lines to automatically install function dependencies
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
