@@ -1,0 +1,293 @@
+/* File: css/style.css */
+
+/* === General & Variables === */
+:root {
+  --green-accent: #4CAF50;
+  --green-accent-hover: #45a049;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1; 
+  padding: 40px 20px;
+}
+
+/* === Navigation Bar === */
+nav {
+  background: #1a1a1a;
+  padding: 10px 30px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  position: relative; 
+}
+
+/* MODIFIED: Circular container is smaller, adjusted margin */
+.logo {
+  height: 120px; /* Slightly decreased from 130px */
+  width: 120px;  /* Slightly decreased from 130px */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  
+  background-color: #1a1a1a; 
+  border-radius: 50%; 
+  
+  object-fit: contain; 
+  
+  margin: -45px 0; /* Adjusted negative margin for new size */
+  position: relative;
+  z-index: 10;
+}
+
+/* MODIFIED: Image inside the container is now larger */
+.logo img {
+  max-height: 95%; /* Increased from 90% */
+  max-width: 95%;  /* Increased from 90% */
+  object-fit: contain; 
+}
+
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ... (The rest of the CSS is the same) ... */
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+.nav-menu a:hover {
+  background: #333;
+}
+.hero {
+  position: relative;
+  min-height: 55vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/golf-bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cta-btn {
+  background: var(--green-accent);
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+.cta-btn:hover {
+  background: var(--green-accent-hover);
+}
+.how-it-works {
+  background: #222;
+  padding: 40px 20px;
+  text-align: center;
+}
+.how-it-works h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.column {
+  background: #333;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+}
+.column h3 {
+  margin-bottom: 15px;
+  color: var(--green-accent);
+}
+.browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.listing-card {
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+.listing-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.listing-card-content {
+    padding: 15px;
+}
+.listing-card-content h3 {
+    margin-top: 0;
+    color: var(--green-accent);
+}
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #222;
+    padding: 30px;
+    border-radius: 8px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label:not(.custom-file-upload) {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 12px;
+    background: #333;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 6px;
+    box-sizing: border-box; 
+}
+.custom-file-upload {
+  display: flex; 
+  align-items: center;
+  cursor: pointer;
+}
+.custom-file-upload input[type="file"] {
+  display: none; 
+}
+.file-upload-button {
+  padding: 10px 20px; 
+  margin-right: 15px; 
+}
+.file-name {
+  color: #aaa; 
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+footer {
+  background: #111;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: auto; 
+}
+.nav-toggle {
+  display: none; 
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
+}
+.hamburger {
+  display: block;
+  position: relative;
+  width: 25px;
+  height: 2px;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
+}
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
+}
+.hamburger::before {
+  top: -8px;
+}
+.hamburger::after {
+  bottom: -8px;
+}
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block; 
+  }
+  .nav-menu {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    right: 0; 
+    width: 200px; 
+    background: #1a1a1a;
+    flex-direction: column;
+    align-items: flex-start; 
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  .nav-menu.active {
+    display: flex; 
+  }
+  .nav-menu a {
+    margin: 5px 0;
+    width: 100%;
+    text-align: left; 
+    padding: 10px 20px; 
+    box-sizing: border-box;
+  }
+  .nav-toggle.active .hamburger {
+    background: transparent;
+  }
+  .nav-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  .nav-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Your Item - Wanna-Swap</title>
+  <link rel="stylesheet" href="css/style.css">
+  </head>
+<body>
+  <nav>
+    <a href="index.html">
+      <img src="images/wannaswap-logo.png" alt="Wanna-Swap Logo" class="logo">
+    </a>
+    <button class="nav-toggle" aria-label="toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+    <div class="nav-menu">
+      <a href="browse.html">Browse</a>
+      <a href="list-item.html">List Your Item</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="form-container">
+      <h2>List Your Gear for a Swap</h2>
+      <form id="listing-form" name="listing-form" data-netlify="true">
+        
+        <input type="hidden" name="form-name" value="listing-form" />
+
+        <div class="form-group">
+          <label for="name">Item Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="Golf">Golf</option>
+            <option value="Hockey">Hockey</option>
+            <option value="Baseball">Baseball</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="imageFile" class="custom-file-upload">
+            <span class="cta-btn file-upload-button">Choose Image</span>
+            <span id="file-name" class="file-name">No file chosen</span>
+            <input type="file" id="imageFile" accept="image/png, image/jpeg, image/gif" required>
+          </label>
+        </div>
+
+        <input type="hidden" id="imageURL" name="imageURL">
+
+        <div class="form-group">
+          <label for="contactEmail">Your Contact Email</label>
+          <input type="email" id="contactEmail" name="contactEmail" required>
+        </div>
+
+        <button type="submit" class="cta-btn">Submit Listing</button>
+        <p id="form-status" style="margin-top: 15px;"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 www.wanna-swap.com All rights reserved.
+  </footer>
+
+  <script src="js/list-item.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
