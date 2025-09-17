@@ -1,4 +1,2 @@
-Ini, TOML
-
 [functions]
   directory = "netlify/functions/"
