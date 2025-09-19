@@ -17,14 +17,15 @@ main {
   padding: 40px 20px;
 }
 nav {
-  background: #1a1a1a;
-  padding: 15px 30px; 
+  background: #FFFFFF; /* MODIFIED: White background */
+  padding: 10px 30px; /* MODIFIED: Narrower padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #E0E0E0; /* MODIFIED: Lighter border for white background */
   position: relative; 
-  z-index: 100; /* NEW: Ensures the nav bar and its dropdown are on top of other content */
+  z-index: 100;
+  color: #1A4D2E; /* NEW: Default text color for the nav bar */
 }
 .logo {
   height: 60px; 
@@ -37,14 +38,14 @@ nav {
     gap: 15px;
 }
 .nav-menu a {
-  color: #fff;
+  color: #1A4D2E; /* MODIFIED: Dark green text for links */
   text-decoration: none;
   padding: 8px 15px;
   border-radius: 6px;
   transition: background 0.3s;
 }
 .nav-menu a:hover {
-  background: #333;
+  background: #E0E0E0; /* MODIFIED: Light grey hover for white background */
 }
 .hero {
   position: relative;
@@ -86,16 +87,42 @@ nav {
 .file-name { color: #aaa; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 footer { background: #111; text-align: center; padding: 20px; font-size: 0.9rem; color: #aaa; margin-top: auto; }
 .nav-toggle { display: none; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1000; }
-.hamburger { display: block; position: relative; width: 25px; height: 2px; background: #fff; transition: all 0.2s ease-in-out; }
-.hamburger::before, .hamburger::after { content: ''; position: absolute; width: 25px; height: 2px; background: #fff; transition: all 0.2s ease-in-out; }
+.hamburger {
+  background: #1A4D2E; /* MODIFIED: Dark green hamburger icon */
+  display: block;
+  position: relative;
+  width: 25px;
+  height: 2px;
+  transition: all 0.2s ease-in-out;
+}
+.hamburger::before, .hamburger::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: #1A4D2E; /* MODIFIED: Dark green for hamburger lines */
+  transition: all 0.2s ease-in-out;
+}
 .hamburger::before { top: -8px; }
 .hamburger::after { bottom: -8px; }
 @media (max-width: 767px) {
   .nav-toggle { display: block; }
-  .nav-menu { display: none; position: absolute; top: 100%; right: 0; width: 200px; background: #1a1a1a; flex-direction: column; align-items: flex-start; padding: 10px 0; border-top: 1px solid #333; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    background: #FFFFFF; /* MODIFIED: White background for mobile menu */
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-top: 1px solid #E0E0E0; /* MODIFIED: Lighter border for mobile menu */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Slightly lighter shadow */
+  }
   .nav-menu.active { display: flex; }
-  .nav-menu a { margin: 5px 0; width: 100%; text-align: left; padding: 10px 20px; box-sizing: border-box; }
+  .nav-menu a { margin: 5px 0; width: 100%; text-align: left; padding: 10px 20px; box-sizing: border-box; color: #1A4D2E; /* Ensure mobile links are dark green */ }
   .nav-toggle.active .hamburger { background: transparent; }
-  .nav-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; }
-  .nav-toggle.active .hamburger::after { transform: rotate(-45deg); bottom: 0; }
+  .nav-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; background: #1A4D2E; /* MODIFIED: Dark green X */ }
+  .nav-toggle.active .hamburger::after { transform: rotate(-45deg); bottom: 0; background: #1A4D2E; /* MODIFIED: Dark green X */ }
 }
