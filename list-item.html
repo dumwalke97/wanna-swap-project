@@ -23,9 +23,10 @@
   <main>
     <div class="form-container">
       <h2>List Your Gear for a Swap</h2>
-      <form id="listing-form" name="listing-form" data-netlify="true">
+      <form id="listing-form" name="listing-form" data-netlify="true" netlify-honeypot="bot-field">
         
         <input type="hidden" name="form-name" value="listing-form" />
+        <p hidden><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
         <div class="form-group">
           <label for="name">Item Name</label>
@@ -44,7 +45,10 @@
             <option value="Other">Other</option>
           </select>
         </div>
-        
+         <div class="form-group">
+          <label for="seeking">What I'm Looking For (Optional)</label>
+          <textarea id="seeking" name="seeking" rows="3" placeholder="e.g., Left-handed pitcher's glove..."></textarea>
+        </div>
         <div class="form-group">
           <label for="imageFile" class="custom-file-upload">
             <span class="cta-btn file-upload-button">Choose Image</span>
@@ -52,9 +56,7 @@
             <input type="file" id="imageFile" accept="image/png, image/jpeg, image/gif" required>
           </label>
         </div>
-
         <input type="hidden" id="imageURL" name="imageURL">
-
         <div class="form-group">
           <label for="contactEmail">Your Contact Email</label>
           <input type="email" id="contactEmail" name="contactEmail" required>
