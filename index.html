@@ -34,20 +34,20 @@
   <section id="how-it-works" class="how-it-works">
     <h2>How It Works</h2>
     <div class="columns">
-      <div class="column">
-        <h3>1. List Your Gear</h3>
-        <p>Add the clubs or equipment you want to trade. It’s quick and easy.</p>
-      </div>
-      <div class="column">
-        <h3>2. Find a Match</h3>
-        <p>Browse items from other players and see what fits your game.</p>
-      </div>
-      <div class="column">
-        <h3>3. Swap & Save</h3>
-        <p>Trade directly, save money, and keep your gear fresh.</p>
-      </div>
+      <div class="column"><h3>1. List Your Gear</h3><p>Add the clubs or equipment you want to trade. It’s quick and easy.</p></div>
+      <div class="column"><h3>2. Find a Match</h3><p>Browse items from other players and see what fits your game.</p></div>
+      <div class="column"><h3>3. Swap & Save</h3><p>Trade directly, save money, and keep your gear fresh.</p></div>
     </div>
   </section>
+
+  <form name="listing-form" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <textarea name="description"></textarea>
+    <select name="category"></select>
+    <input type="url" name="imageURL" />
+    <input type="email" name="contactEmail" />
+    <textarea name="seeking"></textarea>
+  </form>
 
   <footer>
     &copy; 2025 www.wanna-swap.com All rights reserved.
