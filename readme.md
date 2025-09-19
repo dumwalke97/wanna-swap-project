@@ -2,7 +2,7 @@
 
 
 
-!\[Wanna-Swap Logo]([images/wannaswap-logo.png](https://github.com/dumwalke97/wanna-swap-project/blob/main/images/wannaswap-logo.png))
+!\[Wanna-Swap Logo](images/wannaswap-logo.png)
 
 
 
@@ -177,5 +177,4 @@ The application requires the following environment variables to be set in the Ne
 \- \[ ] \*\*Search \& Filtering:\*\* Add functionality to search for specific items and filter by category, location, etc.
 
 \- \[ ] \*\*User Reviews \& Ratings:\*\* Build a trust system to encourage fair and safe swaps.
-
 
