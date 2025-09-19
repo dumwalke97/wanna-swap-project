@@ -15,6 +15,7 @@
       <span class="hamburger"></span>
     </button>
     <div class="nav-menu">
+      <a href="index.html">Home</a>
       <a href="browse.html">Browse</a>
       <a href="list-item.html">List Your Item</a>
     </div>
@@ -24,44 +25,23 @@
     <div class="form-container">
       <h2>List Your Gear for a Swap</h2>
       <form id="listing-form" name="listing-form" data-netlify="true" netlify-honeypot="bot-field">
-        
         <input type="hidden" name="form-name" value="listing-form" />
         <p hidden><label>Don’t fill this out: <input name="bot-field" /></label></p>
-
-        <div class="form-group">
-          <label for="name">Item Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" required></textarea>
-        </div>
+        <div class="form-group"><label for="name">Item Name</label><input type="text" id="name" name="name" required></div>
+        <div class="form-group"><label for="description">Description</label><textarea id="description" name="description" rows="4" required></textarea></div>
         <div class="form-group">
           <label for="category">Category</label>
-          <select id="category" name="category">
-            <option value="Golf">Golf</option>
-            <option value="Hockey">Hockey</option>
-            <option value="Baseball">Baseball</option>
-            <option value="Other">Other</option>
-          </select>
+          <select id="category" name="category"><option value="Golf">Golf</option><option value="Hockey">Hockey</option><option value="Baseball">Baseball</option><option value="Other">Other</option></select>
         </div>
          <div class="form-group">
           <label for="seeking">What I'm Looking For (Optional)</label>
           <textarea id="seeking" name="seeking" rows="3" placeholder="e.g., Left-handed pitcher's glove..."></textarea>
         </div>
         <div class="form-group">
-          <label for="imageFile" class="custom-file-upload">
-            <span class="cta-btn file-upload-button">Choose Image</span>
-            <span id="file-name" class="file-name">No file chosen</span>
-            <input type="file" id="imageFile" accept="image/png, image/jpeg, image/gif" required>
-          </label>
+          <label for="imageFile" class="custom-file-upload"><span class="cta-btn file-upload-button">Choose Image</span><span id="file-name" class="file-name">No file chosen</span><input type="file" id="imageFile" accept="image/png, image/jpeg, image/gif" required></label>
         </div>
         <input type="hidden" id="imageURL" name="imageURL">
-        <div class="form-group">
-          <label for="contactEmail">Your Contact Email</label>
-          <input type="email" id="contactEmail" name="contactEmail" required>
-        </div>
-
+        <div class="form-group"><label for="contactEmail">Your Contact Email</label><input type="email" id="contactEmail" name="contactEmail" required></div>
         <button type="submit" class="cta-btn">Submit Listing</button>
         <p id="form-status" style="margin-top: 15px;"></p>
       </form>
