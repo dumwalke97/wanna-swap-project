@@ -31,17 +31,17 @@ function displayListings(submissions) {
         const card = document.createElement('div');
         card.className = 'listing-card';
 
-        // MODIFIED: The <img> tag is now wrapped in an <a> tag
+        // FIXED: All instances of fields.Variable have been changed to fields.variable
         card.innerHTML = `
-            <a href="${fields.ImageURL}" target="_blank" rel="noopener noreferrer">
-                <img src="${fields.ImageURL}" alt="${fields.Name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/280x180?text=Image+Not+Found';">
+            <a href="${fields.imageURL}" target="_blank" rel="noopener noreferrer">
+                <img src="${fields.imageURL}" alt="${fields.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/280x180?text=Image+Not+Found';">
             </a>
             <div class="listing-card-content">
-                <h3>${fields.Name}</h3>
-                <p><strong>Category:</strong> ${fields.Category || 'N/A'}</p>
-                <p>${fields.Description || 'No description provided.'}</p>
+                <h3>${fields.name}</h3>
+                <p><strong>Category:</strong> ${fields.category || 'N/A'}</p>
+                <p>${fields.description || 'No description provided.'}</p>
                 <p><strong>Seeking:</strong> ${fields.seeking || 'Open to offers'}</p> 
-                <a href="mailto:${fields.ContactEmail}" class="cta-btn" style="padding: 10px 20px;">Contact Swapper</a>
+                <a href="mailto:${fields.contactEmail}" class="cta-btn" style="padding: 10px 20px;">Contact Swapper</a>
             </div>
         `;
         gridContainer.appendChild(card);
