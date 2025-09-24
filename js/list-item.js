@@ -7,7 +7,6 @@ const form = document.getElementById('listing-form');
 const statusMessage = document.getElementById('form-status');
 const imageFileInput = document.getElementById('imageFile');
 const hiddenImageURLInput = document.getElementById('imageURL');
-const categorySelect = document.getElementById('category');
 
 // Listen for the main form submission
 form.addEventListener('submit', async (e) => {
@@ -22,11 +21,10 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const cloudinaryData = await uploadImageToCloudinary(imageFile);
+        // REVERTED: Now just gets the image URL, not the full data object.
+        const imageUrl = await uploadImageToCloudinary(imageFile);
         
-        suggestCategory(cloudinaryData);
-
-        hiddenImageURLInput.value = cloudinaryData.secure_url;
+        hiddenImageURLInput.value = imageUrl;
 
         statusMessage.textContent = 'Submitting your listing...';
         await submitFormToNetlify();
@@ -38,11 +36,11 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+// REVERTED: This function now just returns the secure URL.
 async function uploadImageToCloudinary(file) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    formData.append('categorization', 'google_tagging');
 
     const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
         method: 'POST',
@@ -51,35 +49,13 @@ async function uploadImageToCloudinary(file) {
 
     if (!response.ok) { throw new Error('Image upload failed.'); }
     
-    return await response.json();
+    const data = await response.json();
+    return data.secure_url;
 }
 
-function suggestCategory(cloudinaryData) {
-    const categories = cloudinaryData?.info?.categorization?.google_tagging?.data;
-    if (!categories) return;
+// REMOVED: The suggestCategory function has been deleted.
 
-    for (const category of categories) {
-        const tagName = category.tag.toLowerCase();
-        if (tagName.includes('golf')) {
-            categorySelect.value = 'Golf';
-            return;
-        }
-        if (tagName.includes('hockey')) {
-            categorySelect.value = 'Hockey';
-            return;
-        }
-        if (tagName.includes('baseball')) {
-            categorySelect.value = 'Baseball';
-            return;
-        }
-        // NEW: Added rule for Football
-        if (tagName.includes('football')) {
-            categorySelect.value = 'Football';
-            return;
-        }
-    }
-}
-
+// This function handles the final submission to Netlify Forms
 async function submitFormToNetlify() {
     const formData = new FormData(form);
     const response = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(formData).toString(), });
@@ -91,6 +67,7 @@ async function submitFormToNetlify() {
     document.getElementById('file-name').style.color = '#aaa';
 }
 
+// This function updates the file name display when a file is chosen
 imageFileInput.addEventListener('change', () => {
     const fileNameSpan = document.getElementById('file-name');
     if (imageFileInput.files.length > 0) { fileNameSpan.textContent = imageFileInput.files[0].name; fileNameSpan.style.color = '#fff'; } else { fileNameSpan.textContent = 'No file chosen'; fileNameSpan.style.color = '#aaa'; }
