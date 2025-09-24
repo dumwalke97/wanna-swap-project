@@ -1,5 +1,6 @@
 /* File: js/list-item.js */
 
+// IMPORTANT: Make sure your actual Cloudinary credentials are in these lines
 const CLOUDINARY_CLOUD_NAME = 'drpwtrhxp';
 const CLOUDINARY_UPLOAD_PRESET = 'wanna-swap';
 
@@ -21,7 +22,6 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        // REVERTED: Now just gets the image URL, not the full data object.
         const imageUrl = await uploadImageToCloudinary(imageFile);
         
         hiddenImageURLInput.value = imageUrl;
@@ -36,7 +36,8 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-// REVERTED: This function now just returns the secure URL.
+
+// This function handles the direct upload to Cloudinary
 async function uploadImageToCloudinary(file) {
     const formData = new FormData();
     formData.append('file', file);
@@ -47,28 +48,44 @@ async function uploadImageToCloudinary(file) {
         body: formData,
     });
 
-    if (!response.ok) { throw new Error('Image upload failed.'); }
-    
-    const data = await response.json();
-    return data.secure_url;
-}
+    if (!response.ok) {
+        throw new Error('Image upload failed.');
+    }
 
-// REMOVED: The suggestCategory function has been deleted.
+    const data = await response.json();
+    return data.secure_url; 
+}
 
 // This function handles the final submission to Netlify Forms
 async function submitFormToNetlify() {
     const formData = new FormData(form);
-    const response = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(formData).toString(), });
-    if (!response.ok) { throw new Error('Netlify form submission failed.'); }
+    
+    const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString(),
+    });
+
+    if (!response.ok) {
+        throw new Error('Netlify form submission failed.');
+    }
+
     statusMessage.textContent = 'Success! Your item has been listed.';
     statusMessage.style.color = 'var(--green-accent)';
     form.reset();
+    
     document.getElementById('file-name').textContent = 'No file chosen';
     document.getElementById('file-name').style.color = '#aaa';
 }
 
-// This function updates the file name display when a file is chosen
+// Update file name display when a file is chosen
 imageFileInput.addEventListener('change', () => {
     const fileNameSpan = document.getElementById('file-name');
-    if (imageFileInput.files.length > 0) { fileNameSpan.textContent = imageFileInput.files[0].name; fileNameSpan.style.color = '#fff'; } else { fileNameSpan.textContent = 'No file chosen'; fileNameSpan.style.color = '#aaa'; }
+    if (imageFileInput.files.length > 0) {
+        fileNameSpan.textContent = imageFileInput.files[0].name;
+        fileNameSpan.style.color = '#fff';
+    } else {
+        fileNameSpan.textContent = 'No file chosen';
+        fileNameSpan.style.color = '#aaa';
+    }
 });
