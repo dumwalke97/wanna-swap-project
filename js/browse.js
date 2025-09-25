@@ -1,6 +1,11 @@
 /* File: js/browse.js */
 const gridContainer = document.getElementById('browse-grid-container');
 
+// NEW: Get modal elements from the DOM
+const modal = document.getElementById('image-modal');
+const modalImage = document.getElementById('modal-image');
+const closeModalButton = document.querySelector('.modal-close');
+
 async function fetchListings() {
     try {
         const response = await fetch('/.netlify/functions/getlistings');
@@ -31,11 +36,9 @@ function displayListings(submissions) {
         const card = document.createElement('div');
         card.className = 'listing-card';
 
-        // FIXED: All instances of fields.Variable have been changed to fields.variable
+        // MODIFIED: Removed the <a> tag. We'll handle clicks with JavaScript.
         card.innerHTML = `
-            <a href="${fields.imageURL}" target="_blank" rel="noopener noreferrer">
-                <img src="${fields.imageURL}" alt="${fields.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/280x180?text=Image+Not+Found';">
-            </a>
+            <img src="${fields.imageURL}" alt="${fields.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/280x180?text=Image+Not+Found';">
             <div class="listing-card-content">
                 <h3>${fields.name}</h3>
                 <p><strong>Category:</strong> ${fields.category || 'N/A'}</p>
@@ -47,5 +50,35 @@ function displayListings(submissions) {
         gridContainer.appendChild(card);
     });
 }
+
+// NEW: Function to open the modal
+function openModal(src) {
+    modal.style.display = 'flex';
+    modalImage.src = src;
+    document.body.classList.add('modal-open');
+}
+
+// NEW: Function to close the modal
+function closeModal() {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+}
+
+// NEW: Event listener for the whole grid (event delegation)
+gridContainer.addEventListener('click', (event) => {
+    // Check if an image inside a card was clicked
+    if (event.target.tagName === 'IMG') {
+        openModal(event.target.src);
+    }
+});
+
+// NEW: Event listeners for closing the modal
+closeModalButton.addEventListener('click', closeModal);
+modal.addEventListener('click', (event) => {
+    // Close modal if the dark overlay is clicked, but not the image itself
+    if (event.target === modal) {
+        closeModal();
+    }
+});
 
 document.addEventListener('DOMContentLoaded', fetchListings);

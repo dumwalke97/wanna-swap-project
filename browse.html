@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Gear - Wanna-Swap</title>
   <link rel="stylesheet" href="css/style.css">
-  </head>
+</head>
 <body>
   <nav>
     <a href="index.html">
-      <img src="images/wannaswap-logo.png" alt="Wanna-Swap Logo" class="logo">
+      <img src="images/wannaswap-logo.jpg" alt="Wanna-Swap Logo" class="logo">
     </a>
     <button class="nav-toggle" aria-label="toggle navigation">
       <span class="hamburger"></span>
@@ -23,7 +23,14 @@
 
   <main>
     <h2 style="text-align: center; font-size: 2rem;">Browse Available Gear</h2>
-    <div id="browse-grid-container" class="browse-grid"><p>Loading listings...</p></div>
+    <div id="browse-grid-container" class="browse-grid">
+      <p>Loading listings...</p>
+    </div>
+    
+    <div id="image-modal" class="modal-overlay">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modal-image">
+    </div>
   </main>
   
   <footer>
