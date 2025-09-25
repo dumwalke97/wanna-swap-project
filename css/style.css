@@ -18,7 +18,7 @@ main {
 }
 nav {
   background: #FFFFFF;
-  padding: 8px 30px; /* MODIFIED: Reduced padding for a narrower bar */
+  padding: 8px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@ nav {
   color: #1A4D2E;
 }
 .logo {
-  height: 40px; /* MODIFIED: Reduced logo height from 60px */
+  height: 40px;
   width: auto;
   display: block;
 }
@@ -73,7 +73,12 @@ nav {
 .column h3 { margin-bottom: 15px; color: var(--green-accent); }
 .browse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
 .listing-card { background: #222; border-radius: 8px; overflow: hidden; border: 1px solid #333; display: flex; flex-direction: column; }
-.listing-card img { width: 100%; height: 180px; object-fit: cover; }
+.listing-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain; /* MODIFIED: Shows the full image, scales down if needed */
+    background-color: #333; /* NEW: Fills empty space with dark grey */
+}
 .listing-card-content { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
 .listing-card-content h3 { margin-top: 0; color: var(--green-accent); }
 .listing-card-content p { flex-grow: 1; }
