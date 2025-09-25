@@ -1,36 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Gear - Wanna-Swap</title>
   <link rel="stylesheet" href="css/style.css">
-  </head>
+</head>
 <body>
   <nav>
-    <a href="index.html">
-      <img src="images/wannaswap-logo.png" alt="Wanna-Swap Logo" class="logo">
-    </a>
-    <button class="nav-toggle" aria-label="toggle navigation">
-      <span class="hamburger"></span>
-    </button>
-    <div class="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="browse.html">Browse</a>
-      <a href="list-item.html">List Your Item</a>
-    </div>
+    <a href="index.html"><img src="images/wannaswap-logo.png" alt="Wanna-Swap Logo" class="logo"></a>
+    <button class="nav-toggle" aria-label="toggle navigation"><span class="hamburger"></span></button>
+    <div class="nav-menu"><a href="index.html">Home</a><a href="browse.html">Browse</a><a href="list-item.html">List Your Item</a></div>
   </nav>
 
   <main>
     <h2 style="text-align: center; font-size: 2rem;">Browse Available Gear</h2>
-    <div id="browse-grid-container" class="browse-grid">
-      <p>Loading listings...</p>
-    </div>
+    <div id="browse-grid-container" class="browse-grid"><p>Loading listings...</p></div>
     
-    <div id="image-modal" class="modal-overlay">
-      <span class="modal-close">&times;</span>
-      <img class="modal-content" id="modal-image">
-    </div>
+    <div id="image-modal" class="modal-overlay"><span class="modal-close">&times;</span><img class="modal-content" id="modal-image"></div>
 
     <div id="contact-modal" class="modal-overlay">
       <div class="form-container contact-form-container">
@@ -40,11 +26,22 @@
         <form id="contact-form" name="contact-form" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact-form" />
           <p hidden><label>Don’t fill this out: <input name="bot-field" /></label></p>
-          <input type="hidden" id="recipient-email" name="recipient-email" />
-          <input type="hidden" id="item-name" name="item-name" />
-          <div class="form-group"><label for="sender-name">Your Name</label><input type="text" id="sender-name" name="sender-name" required></div>
-          <div class="form-group"><label for="sender-email">Your Email</label><input type="email" id="sender-email" name="sender-email" required></div>
-          <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+          
+          <input type="hidden" id="recipient_email" name="recipient_email" />
+          <input type="hidden" id="item_name" name="item_name" />
+
+          <div class="form-group">
+            <label for="sender_name">Your Name</label>
+            <input type="text" id="sender_name" name="sender_name" required>
+          </div>
+          <div class="form-group">
+            <label for="sender_email">Your Email</label>
+            <input type="email" id="sender_email" name="sender_email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
           <button type="submit" class="cta-btn">Send Inquiry</button>
           <p id="contact-form-status" style="margin-top: 15px;"></p>
         </form>
@@ -52,10 +49,8 @@
     </div>
   </main>
   
-  <footer>
-    &copy; 2025 www.wanna-swap.com All rights reserved.
-  </footer>
-
+  <footer>&copy; 2025 www.wanna-swap.com All rights reserved.</footer>
   <script src="js/browse.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
