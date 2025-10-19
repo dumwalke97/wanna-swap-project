@@ -3,68 +3,19 @@
   --green-accent: #4CAF50;
   --green-accent-hover: #45a049;
 }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  background: #111;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-main {
-  flex: 1; 
-  padding: 40px 20px;
-}
-nav {
-  background: #FFFFFF;
-  padding: 8px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #E0E0E0;
-  position: relative; 
-  z-index: 100;
-  color: #1A4D2E;
-}
-.logo {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-.nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.nav-menu a {
-  color: #1A4D2E;
-  text-decoration: none;
-  padding: 8px 15px;
-  border-radius: 6px;
-  transition: background 0.3s;
-}
-.nav-menu a:hover {
-  background: #E0E0E0;
-}
-.hero {
-  position: relative;
-  min-height: 55vh; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('../images/golf-bg2.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+body { margin: 0; font-family: Arial, sans-serif; color: #fff; background: #111; display: flex; flex-direction: column; min-height: 100vh; }
+body.modal-open { overflow: hidden; }
+main { flex: 1; padding: 40px 20px; }
+nav { background: #FFFFFF; padding: 8px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E0E0E0; position: relative; z-index: 100; color: #1A4D2E; }
+.logo { height: 40px; width: auto; display: block; }
+.nav-menu { display: flex; align-items: center; gap: 15px; }
+.nav-menu a { color: #1A4D2E; text-decoration: none; padding: 8px 15px; border-radius: 6px; transition: background 0.3s; }
+.nav-menu a:hover { background: #E0E0E0; }
+.hero { position: relative; min-height: 55vh; display: flex; justify-content: center; align-items: center; text-align: center; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/golf-bg2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
 .hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
 .hero-content p { font-size: 1.25rem; margin-bottom: 30px; }
 .hero-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.cta-btn { background: var(--green-accent); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; text-decoration: none; transition: background 0.3s; white-space: nowrap; }
+.cta-btn { background: var(--green-accent); color: #fff; padding: 15px 30px; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; text-decoration: none; transition: background 0.3s; white-space: nowrap; cursor: pointer;}
 .cta-btn:hover { background: var(--green-accent-hover); }
 .how-it-works { background: #222; padding: 40px 20px; text-align: center; }
 .how-it-works h2 { font-size: 2rem; margin-bottom: 40px; }
@@ -73,20 +24,11 @@ nav {
 .column h3 { margin-bottom: 15px; color: var(--green-accent); }
 .browse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
 .listing-card { background: #222; border-radius: 8px; overflow: hidden; border: 1px solid #333; display: flex; flex-direction: column; }
-.listing-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain; /* MODIFIED: Shows the full image, scales down if needed */
-    background-color: #333; /* NEW: Fills empty space with dark grey */
-    cursor: pointer;
-}
+.listing-card img { width: 100%; height: 180px; object-fit: contain; background-color: #333; cursor: pointer; }
 .listing-card-content { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
 .listing-card-content h3 { margin-top: 0; color: var(--green-accent); }
-.listing-card-content p { flex-grow: 1; }
-.contact-swapper-btn {
-    padding: 10px 20px;
-    margin-top: auto;
-}
+.listing-card-content p { flex-grow: 1; margin-bottom: 10px; } /* Added margin */
+.contact-swapper-btn { padding: 10px 20px; margin-top: auto; }
 .form-container { max-width: 600px; margin: 0 auto; background: #222; padding: 30px; border-radius: 8px; }
 .form-group { margin-bottom: 20px; }
 .form-group label:not(.custom-file-upload) { display: block; margin-bottom: 8px; font-weight: bold; }
@@ -96,7 +38,6 @@ nav {
 .file-upload-button { padding: 10px 20px; margin-right: 15px; }
 .file-name { color: #aaa; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .modal-overlay { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
-body.modal-open { overflow: hidden; }
 .modal-content { margin: auto; display: block; max-width: 90%; max-height: 80%; }
 .modal-close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
 .modal-close:hover, .modal-close:focus { color: #bbb; text-decoration: none; }
@@ -118,4 +59,31 @@ footer { background: #111; text-align: center; padding: 20px; font-size: 0.9rem;
   .nav-toggle.active .hamburger { background: transparent; }
   .nav-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; background: #1A4D2E; }
   .nav-toggle.active .hamburger::after { transform: rotate(-45deg); bottom: 0; background: #1A4D2E; }
+}
+
+/* === NEW: Filter Button Styles === */
+.filter-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.filter-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+  background-color: #555;
+}
+
+.filter-btn.active {
+  background-color: var(--green-accent);
+  color: #fff;
+  border-color: var(--green-accent);
 }
