@@ -31,12 +31,16 @@
         <div class="form-group"><label for="description">Description</label><textarea id="description" name="description" rows="4" required></textarea></div>
         <div class="form-group">
           <label for="category">Category</label>
-          <select id="category" name="category">
-            <option value="Golf">Golf</option>
-            <option value="Hockey">Hockey</option>
-            <option value="Baseball">Baseball</option>
-            <option value="Football">Football</option>
-            <option value="Other">Other</option>
+          <select id="category" name="category"><option value="Golf">Golf</option><option value="Hockey">Hockey</option><option value="Baseball">Baseball</option><option value="Football">Football</option><option value="Other">Other</option></select>
+        </div>
+        <div class="form-group">
+          <label for="condition">Condition</label>
+          <select id="condition" name="condition" required>
+            <option value="" disabled selected>Select Condition</option>
+            <option value="New">New</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
           </select>
         </div>
          <div class="form-group">
