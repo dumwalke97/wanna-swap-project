@@ -3,7 +3,12 @@
 // --- Hamburger Menu Logic ---
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
-if (navToggle && navMenu) { /* ... */ }
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
+}
 
 // --- Browse Page Logic ---
 const gridContainer = document.getElementById('browse-grid-container');
@@ -17,33 +22,34 @@ const contactFormStatus = document.getElementById('contact-form-status');
 const recipientEmailInput = document.getElementById('recipient_email');
 const itemNameInput = document.getElementById('item_name');
 
+// NEW: Variable to store all listings fetched from the server
 let allListings = [];
+// NEW: Get the filter button container
 const filterContainer = document.querySelector('.filter-container');
-// NEW: Get the condition dropdown
-const conditionFilterSelect = document.getElementById('condition-filter');
-
-// NEW: Store current filter state
-let currentCategory = 'All';
-let currentCondition = 'All';
 
 async function fetchListings() {
     try {
         const response = await fetch('/.netlify/functions/getlistings');
         if (!response.ok) { throw new Error('Failed to fetch listings.'); }
         const data = await response.json();
+        
+        // NEW: Store all listings globally
         allListings = data;
-        applyFilters(); // Apply initial filters (defaults to "All")
+        
+        // Display all listings initially
+        displayListings(allListings);
+        
     } catch (error) {
         console.error(error);
         if(gridContainer) gridContainer.innerHTML = '<p style="color: red;">Could not load listings. Please try again later.</p>';
     }
 }
 
-// MODIFIED: Displays listings based on provided array
+// MODIFIED: This function now accepts an array of listings to display
 function displayListings(listingsToDisplay) {
     if (!gridContainer) return;
     if (listingsToDisplay.length === 0) {
-        gridContainer.innerHTML = '<p>No items match the current filters.</p>';
+        gridContainer.innerHTML = '<p>No items found for this category.</p>';
         return;
     }
     gridContainer.innerHTML = ''; 
@@ -52,63 +58,51 @@ function displayListings(listingsToDisplay) {
         if (!fields.name || !fields.imageURL) { return; }
         const card = document.createElement('div');
         card.className = 'listing-card';
-        // ADDED: Display the condition in the card
-        card.innerHTML = `<img src="${fields.imageURL}" alt="${fields.name}" onerror="this.onerror=null;this.src='https.via.placeholder.com/280x180?text=Image+Not+Found';"><div class="listing-card-content"><h3>${fields.name}</h3><p><strong>Category:</strong> ${fields.category || 'N/A'}</p><p><strong>Condition:</strong> ${fields.condition || 'N/A'}</p><p>${fields.description || 'No description provided.'}</p><p><strong>Seeking:</strong> ${fields.seeking || 'Open to offers'}</p><button class="cta-btn contact-swapper-btn" data-recipient="${fields.contactEmail}" data-item="${fields.name}">Contact Swapper</button></div>`;
+        card.innerHTML = `<img src="${fields.imageURL}" alt="${fields.name}" onerror="this.onerror=null;this.src='https.via.placeholder.com/280x180?text=Image+Not+Found';"><div class="listing-card-content"><h3>${fields.name}</h3><p><strong>Category:</strong> ${fields.category || 'N/A'}</p><p>${fields.description || 'No description provided.'}</p><p><strong>Seeking:</strong> ${fields.seeking || 'Open to offers'}</p><button class="cta-btn contact-swapper-btn" data-recipient="${fields.contactEmail}" data-item="${fields.name}">Contact Swapper</button></div>`;
         gridContainer.appendChild(card);
     });
 }
 
-// NEW: Combined filter logic
-function applyFilters() {
-    let filteredListings = allListings;
-
-    // Filter by category
-    if (currentCategory !== 'All') {
-        filteredListings = filteredListings.filter(submission => submission.data.category === currentCategory);
-    }
-
-    // Filter by condition
-    if (currentCondition !== 'All') {
-        filteredListings = filteredListings.filter(submission => submission.data.condition === currentCondition);
-    }
-
-    displayListings(filteredListings);
-}
-
 // --- Modal Logic (Image & Contact) ---
-// (The openModal, closeModal functions remain the same)
-function openImageModal(src) { /* ... */ }
-function closeImageModal() { /* ... */ }
+// (The openModal, closeModal functions remain the same as before)
+function openImageModal(src) { imageModal.style.display = 'flex'; modalImage.src = src; document.body.classList.add('modal-open'); }
+function closeImageModal() { imageModal.style.display = 'none'; document.body.classList.remove('modal-open'); }
 if(closeModalButton) closeModalButton.addEventListener('click', closeImageModal);
 if(imageModal) imageModal.addEventListener('click', (event) => { if (event.target === imageModal) { closeImageModal(); } });
-function openContactModal(recipientEmail, itemName) { /* ... */ }
-function closeContactModal() { /* ... */ }
-if(gridContainer) gridContainer.addEventListener('click', (event) => { /* ... */ });
+function openContactModal(recipientEmail, itemName) { recipientEmailInput.value = recipientEmail; itemNameInput.value = itemName; contactModal.style.display = 'flex'; document.body.classList.add('modal-open'); }
+function closeContactModal() { contactModal.style.display = 'none'; contactForm.reset(); contactFormStatus.textContent = ''; document.body.classList.remove('modal-open'); }
+if(gridContainer) gridContainer.addEventListener('click', (event) => { if (event.target.tagName === 'IMG') { openImageModal(event.target.src); } if (event.target.classList.contains('contact-swapper-btn')) { const recipient = event.target.dataset.recipient; const item = event.target.dataset.item; openContactModal(recipient, item); } });
 if(closeContactModalButton) closeContactModalButton.addEventListener('click', closeContactModal);
 if(contactModal) contactModal.addEventListener('click', (event) => { if (event.target === contactModal) { closeContactModal(); } });
-if(contactForm) contactForm.addEventListener('submit', (e) => { /* ... */ });
+if(contactForm) contactForm.addEventListener('submit', (e) => { e.preventDefault(); contactFormStatus.textContent = 'Sending...'; const formData = new FormData(contactForm); const headers = { "Content-Type": "application/x-www-form-urlencoded" }; const body = new URLSearchParams(formData).toString(); fetch('/', { method: 'POST', headers, body }).then(() => { contactFormStatus.textContent = 'Success! Your inquiry has been sent.'; contactFormStatus.style.color = 'var(--green-accent)'; setTimeout(closeContactModal, 2000); }).catch((error) => { contactFormStatus.textContent = `Error: ${error.message}`; contactFormStatus.style.color = 'red'; }); });
 
-// --- Filter Event Listeners ---
-// Listener for category buttons
-if (filterContainer) {
-    filterContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('category-btn')) {
-            const buttons = filterContainer.querySelectorAll('.category-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            const clickedButton = event.target;
-            clickedButton.classList.add('active');
-            
-            currentCategory = clickedButton.dataset.category; // Update current category
-            applyFilters(); // Apply both filters
-        }
-    });
+
+// --- NEW: Filter Logic ---
+function filterListings(category) {
+    if (category === 'All') {
+        displayListings(allListings); // Show all listings
+    } else {
+        const filteredListings = allListings.filter(submission => submission.data.category === category);
+        displayListings(filteredListings); // Show only filtered listings
+    }
 }
 
-// NEW: Listener for condition dropdown
-if (conditionFilterSelect) {
-    conditionFilterSelect.addEventListener('change', (event) => {
-        currentCondition = event.target.value; // Update current condition
-        applyFilters(); // Apply both filters
+// NEW: Event listener for filter buttons
+if (filterContainer) {
+    filterContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('filter-btn')) {
+            // Remove 'active' class from all buttons
+            const buttons = filterContainer.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Add 'active' class to the clicked button
+            const clickedButton = event.target;
+            clickedButton.classList.add('active');
+
+            // Get the category and filter
+            const category = clickedButton.dataset.category;
+            filterListings(category);
+        }
     });
 }
 
